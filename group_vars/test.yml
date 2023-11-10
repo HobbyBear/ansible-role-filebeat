@@ -1,5 +1,5 @@
-log_path: "- /home/webserver/logs/zdisk-api/zdisk-api.log\r\n    - /home/webserver/logs/zdisk-bsk/zdisk-bsk.log\r\n    - /home/webserver/logs/zdisk-flow/zdisk-flow.log"
+log_path: "- /home/webserver/logs/box-api/box-api.log\r\n    - /home/webserver/logs/box-bsk/box-bsk.log\r\n    - /home/webserver/logs/box-flow/box-flow.log"
 
 log_type:
-  linkbox
+  box
 
