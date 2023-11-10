@@ -1,0 +1,7 @@
+- name: restart Filebeat service
+  become: yes
+  become_method: sudo
+  service:
+    name: filebeat
+    enabled: yes
+    state: restarted

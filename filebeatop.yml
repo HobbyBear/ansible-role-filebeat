@@ -1,0 +1,6 @@
+- hosts: test
+  roles:
+    - role: filebeat
+      version : '7.14.2'
+  vars:
+    logstashendpoint:  192.168.0.2:5054

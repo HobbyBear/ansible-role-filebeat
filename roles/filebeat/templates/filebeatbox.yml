@@ -1,0 +1,10 @@
+max_bytes: 3145728
+max_procs: 1
+filebeat.config.inputs:
+  enabled: true
+  path: /home/webserver/local/filebeat-{{ version }}-linux-x86_64/*log.yml
+
+output.logstash:
+  hosts: [ {{ logstashendpoint }} ]
+logging.level: info
+

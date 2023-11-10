@@ -1,0 +1,21 @@
+- name: 确认filebeat下载目录
+  file:
+    path: /home/webserver/local
+    state: directory
+
+- name: 下载 Filebeat
+  get_url:
+    url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-{{ version }}-linux-x86_64.tar.gz
+    dest: /home/webserver/local/filebeat.tar.gz
+    mode: '0755'
+
+- name: 解压 Filebeat
+  unarchive:
+    src: /home/webserver/local/filebeat.tar.gz
+    dest: /home/webserver/local/
+    remote_src: yes
+
+- name: 删除 Filebeat tar file
+  file:
+    path: /home/webserver/local/filebeat.tar.gz
+    state: absent

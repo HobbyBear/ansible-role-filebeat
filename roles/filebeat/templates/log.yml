@@ -1,0 +1,6 @@
+- type: log
+  tail_files: true
+  paths:
+    {{ log_path}}
+  fields:
+    log_type: {{ log_type }}

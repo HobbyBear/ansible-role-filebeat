@@ -1,0 +1,39 @@
+- name: 确认filebeat目录
+  stat:
+    path: /home/webserver/local/filebeat-{{ version }}-linux-x86_64
+  register: directory_check
+
+- name: 目录不存在则终止任务
+  assert:
+    that: directory_check.stat.exists
+    msg:  filebeat-{{version}}-linux-x86_64 does not exist
+
+- name: 传送配置文件
+  become: yes
+  become_method: sudo
+  template: src=log.yml dest=/home/webserver/local/filebeat-{{ version }}-linux-x86_64/log.yml owner=root group=root
+
+- name: 传送配置文件
+  become: yes
+  become_method: sudo
+  template: src=filebeatbox.yml dest=/home/webserver/local/filebeat-{{ version }}-linux-x86_64/filebeatbox.yml owner=root group=root
+
+- name: 删除旧服务配置
+  shell: "sudo rm -f /etc/systemd/system/filebeat.service.d/debug.conf "
+
+- name: 创建服务配置目录
+  shell: "sudo mkdir -p /etc/systemd/system/filebeat.service.d"
+
+- name: 传送filebeat服务配置文件
+  become: yes
+  become_method: sudo
+  template:
+    src: debug.conf
+    dest: /etc/systemd/system/filebeat.service.d/debug.conf
+    owner: root
+    group: root
+    mode: '0440'
+- name: 更新服务配置
+  shell: "sudo systemctl daemon-reload"
+  notify:
+    - restart Filebeat service
