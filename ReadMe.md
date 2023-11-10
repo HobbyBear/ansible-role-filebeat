@@ -18,6 +18,3 @@ ansible-playbook -i hosts    filebeatop.yml --tags "rpm"
 ```shell
 ansible-playbook -i hosts    filebeatop.yml --tags "updatecfg"
 ```
-
-## node exporter 
-每台机器都装上 node exporter 配置端口
